@@ -1,2 +1,4 @@
 # TodoList-WebApp
-This todo list, Get the shxt done, is a simple web app coded by Vanilla Javascript
+This is a simple web app (Todo List) coded by Vanilla Javascript
+
+![todo-list-prototype](prototype/prototype.jpg)
