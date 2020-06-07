@@ -1,0 +1,51 @@
+.workspace {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+
+.left {
+  flex: 7 1 40rem;
+  text-align: right;
+  margin: 0rem 2rem;
+}
+
+.right {
+  flex: 4 1 40rem;
+  position: relative;
+  margin: 0rem 2rem;
+}
+
+#input,
+#submit {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  border: none;
+}
+
+#input {
+  padding: 1.5rem 1rem;
+  background: #f5f5f5;
+  color: #2c2c2c;
+  width: 40%;
+  min-width: 30rem;
+}
+
+#input:focus {
+  border: none;
+}
+
+#submit {
+  padding: 1.5rem 3rem;
+  background: #4789eb;
+  color: #f5f5f5;
+  cursor: pointer;
+  margin-left: -3px;
+  transition: all 0.2s ease-in-out;
+}
+
+#submit:hover {
+  background: #2564c4;
+}
