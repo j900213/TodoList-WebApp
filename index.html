@@ -7,6 +7,12 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="./style/style.css" />
     <title>Get the shit done</title>
   </head>
@@ -22,7 +28,19 @@
             <button type="submit" id="submit">Add</button>
           </div>
         </form>
-        <div class="todo-list"></div>
+        <div class="list-wrapper">
+          <ul class="todo-list">
+            <div class="item-wrapper">
+              <li class="todo-item">Item1</li>
+              <button class="complete-button">
+                <i class="fas fa-check"></i>
+              </button>
+              <button class="delete-button">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </ul>
+        </div>
       </div>
       <div class="right">
         <div class="filter-wrapper">
