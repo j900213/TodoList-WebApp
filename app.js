@@ -1,4 +1,6 @@
-// Select DOM
+/*--------------------*/
+/*---- Select DOM ----*/
+/*--------------------*/
 const input = document.querySelector("#input");
 const submit = document.querySelector("#submit");
 const list = document.querySelector(".todo-list");
@@ -7,10 +9,17 @@ console.log(submit);
 console.log(input);
 console.log(list);
 
-// Event Listener
+/*------------------------*/
+/*---- Event Listener ----*/
+/*------------------------*/
 submit.addEventListener("click", addTodo);
+list.addEventListener("click", deleteTodo);
 
-// Functions
+/*-------------------*/
+/*---- Functions ----*/
+/*-------------------*/
+
+// Add items to the list
 function addTodo(event) {
   // Prevent refreshing after submitting
   event.preventDefault();
@@ -18,10 +27,12 @@ function addTodo(event) {
   const wrapperDiv = document.createElement("div");
   wrapperDiv.classList.add("item-wrapper");
   // Create todo item
+  const todoDiv = document.createElement("div");
   const todoItem = document.createElement("li");
   todoItem.classList.add("todo-item");
   todoItem.innerText = input.value;
-  wrapperDiv.appendChild(todoItem);
+  todoDiv.appendChild(todoItem);
+  wrapperDiv.appendChild(todoDiv);
   // Create Completed Button
   const completeButton = document.createElement("button");
   completeButton.classList.add("complete-button");
@@ -38,4 +49,22 @@ function addTodo(event) {
 
   // Add the whole div to the list
   list.appendChild(wrapperDiv);
+}
+
+// Delte todo items
+function deleteTodo(event) {
+  const targetItem = event.target;
+
+  console.log(targetItem.classList[0]);
+
+  if (targetItem.classList[0] === "delete-button") {
+    const todoItem = targetItem.parentElement;
+    todoItem.classList.add("fall-down");
+    todoItem.addEventListener("transitionend", function () {
+      todoItem.remove();
+    });
+  } else if (targetItem.classList[0] === "complete-button") {
+    const todoItem = targetItem.parentElement;
+    todoItem.classList.add("cross-out");
+  }
 }
