@@ -207,15 +207,15 @@ form {
   opacity: 0;
 }
 
-.cross-out {
+.completed {
   opacity: 50%;
 }
 
-.cross-out div {
+.completed div {
   position: relative;
 }
 
-.cross-out div .todo-item::after {
+.completed div .todo-item::after {
   content: "";
   position: absolute;
   bottom: 50%;
