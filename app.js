@@ -55,16 +55,16 @@ function addTodo(event) {
 function deleteTodo(event) {
   const targetItem = event.target;
 
-  console.log(targetItem.classList[0]);
-
   if (targetItem.classList[0] === "delete-button") {
-    const todoItem = targetItem.parentElement;
-    todoItem.classList.add("fall-down");
-    todoItem.addEventListener("transitionend", function () {
-      todoItem.remove();
+    const wrapperDiv = targetItem.parentElement;
+    wrapperDiv.classList.add("fall-down");
+    console.log(wrapperDiv);
+    wrapperDiv.addEventListener("transitionend", function () {
+      wrapperDiv.remove();
     });
   } else if (targetItem.classList[0] === "complete-button") {
-    const todoItem = targetItem.parentElement;
-    todoItem.classList.add("cross-out");
+    const wrapperDiv = targetItem.parentElement;
+    wrapperDiv.classList.add("cross-out");
+    console.log(wrapperDiv);
   }
 }
