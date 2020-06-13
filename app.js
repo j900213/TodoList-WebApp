@@ -11,6 +11,7 @@ console.log(filter);
 /*------------------------*/
 /*---- Event Listener ----*/
 /*------------------------*/
+document.addEventListener("DOMContentLoaded", retrieveItem);
 submit.addEventListener("click", addTodo);
 list.addEventListener("click", deleteTodo);
 filter.addEventListener("click", filterOption);
@@ -23,9 +24,12 @@ filter.addEventListener("click", filterOption);
 function addTodo(event) {
   // Prevent refreshing after submitting
   event.preventDefault();
+
   // Create the div of item wrapper
+
   const wrapperDiv = document.createElement("div");
   wrapperDiv.classList.add("item-wrapper");
+
   // Create todo item
   const todoDiv = document.createElement("div");
   const todoItem = document.createElement("li");
@@ -33,11 +37,17 @@ function addTodo(event) {
   todoItem.innerText = input.value;
   todoDiv.appendChild(todoItem);
   wrapperDiv.appendChild(todoDiv);
+
+  // Save the item to the local storage
+  saveItems(input.value);
+
   // Create Completed Button
+
   const completeButton = document.createElement("button");
   completeButton.classList.add("complete-button");
   completeButton.innerHTML = `<i class="fas fa-check"></i>`;
   wrapperDiv.appendChild(completeButton);
+
   // Create Delete Button
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete-button");
@@ -101,5 +111,62 @@ function filterOption(event) {
       default:
         break;
     }
+  });
+}
+
+// Save items to the local storage
+function saveItems(item) {
+  let todoList;
+  console.log(item);
+  // Check if the local storage is empty or not
+  if (localStorage.getItem("todoList") === null) {
+    todoList = [];
+  } else {
+    todoList = JSON.parse(localStorage.getItem("todoList"));
+  }
+  todoList.push(item);
+  localStorage.setItem("todoList", JSON.stringify(todoList));
+}
+
+// Retrieve the items from the local storage
+function retrieveItem() {
+  let todoList;
+  // Check if the local storage is empty or not
+  if (localStorage.getItem("todoList") === null) {
+    todoList = [];
+  } else {
+    todoList = JSON.parse(localStorage.getItem("todoList"));
+  }
+  // Restore all the items in the local storage
+  todoList.forEach(function (item) {
+    // Create the div of item wrapper
+    const wrapperDiv = document.createElement("div");
+    wrapperDiv.classList.add("item-wrapper");
+
+    // Create todo item
+    const todoDiv = document.createElement("div");
+    const todoItem = document.createElement("li");
+    todoItem.classList.add("todo-item");
+    todoItem.innerText = item;
+    todoDiv.appendChild(todoItem);
+    wrapperDiv.appendChild(todoDiv);
+
+    // Create Completed Button
+    const completeButton = document.createElement("button");
+    completeButton.classList.add("complete-button");
+    completeButton.innerHTML = `<i class="fas fa-check"></i>`;
+    wrapperDiv.appendChild(completeButton);
+
+    // Create Delete Button
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-button");
+    deleteButton.innerHTML = `<i class="fas fa-trash"></i>`;
+    wrapperDiv.appendChild(deleteButton);
+
+    // Get rid of the input value
+    input.value = "";
+
+    // Add the whole div to the list
+    list.appendChild(wrapperDiv);
   });
 }
