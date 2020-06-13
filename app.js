@@ -4,16 +4,16 @@
 const input = document.querySelector("#input");
 const submit = document.querySelector("#submit");
 const list = document.querySelector(".todo-list");
+const filter = document.querySelector("#filter");
 
-console.log(submit);
-console.log(input);
-console.log(list);
+console.log(filter);
 
 /*------------------------*/
 /*---- Event Listener ----*/
 /*------------------------*/
 submit.addEventListener("click", addTodo);
 list.addEventListener("click", deleteTodo);
+filter.addEventListener("click", filterOption);
 
 /*-------------------*/
 /*---- Functions ----*/
@@ -58,13 +58,48 @@ function deleteTodo(event) {
   if (targetItem.classList[0] === "delete-button") {
     const wrapperDiv = targetItem.parentElement;
     wrapperDiv.classList.add("fall-down");
-    console.log(wrapperDiv);
     wrapperDiv.addEventListener("transitionend", function () {
       wrapperDiv.remove();
     });
   } else if (targetItem.classList[0] === "complete-button") {
     const wrapperDiv = targetItem.parentElement;
-    wrapperDiv.classList.add("cross-out");
-    console.log(wrapperDiv);
+    wrapperDiv.classList.toggle("completed");
   }
+}
+
+// Filter todo options
+function filterOption(event) {
+  const todoItem = list.childNodes;
+  todoItem.forEach(function (item) {
+    console.log(item.classList);
+    switch (event.target.value) {
+      case "all":
+        if (item.classList === undefined) {
+          break;
+        } else {
+          item.style.display = "flex";
+        }
+        break;
+      case "done":
+        if (item.classList === undefined) {
+          break;
+        } else if (item.classList.contains("completed")) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+        break;
+      case "ongoing":
+        if (item.classList === undefined) {
+          break;
+        } else if (!item.classList.contains("completed")) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+        break;
+      default:
+        break;
+    }
+  });
 }
