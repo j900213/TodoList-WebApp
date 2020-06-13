@@ -68,6 +68,7 @@ function deleteTodo(event) {
   if (targetItem.classList[0] === "delete-button") {
     const wrapperDiv = targetItem.parentElement;
     wrapperDiv.classList.add("fall-down");
+    removeItem(wrapperDiv);
     wrapperDiv.addEventListener("transitionend", function () {
       wrapperDiv.remove();
     });
@@ -169,4 +170,18 @@ function retrieveItem() {
     // Add the whole div to the list
     list.appendChild(wrapperDiv);
   });
+}
+
+// Remove the items from the local storage
+function removeItem(item) {
+  let todoList;
+  // Check if the local storage is empty or not
+  if (localStorage.getItem("todoList") === null) {
+    todoList = [];
+  } else {
+    todoList = JSON.parse(localStorage.getItem("todoList"));
+  }
+  itemContent = item.children[0].children[0].innerText;
+  todoList.splice(todoList.indexOf(itemContent), 1);
+  localStorage.setItem("todoList", JSON.stringify(todoList));
 }
